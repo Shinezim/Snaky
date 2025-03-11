@@ -16,10 +16,6 @@ foodImg.src = "img/food.png"
 const bombImg = new Image()
 bombImg.src = "img/bomb.png"
 
-//Майнкрафт лаки блок
-const blockImg = new Image()
-blockImg.src = "img/block.jpeg"
-
 //Ячейка
 let box = 32
 
@@ -77,6 +73,10 @@ for (let i = 1; i < Math.random(2, 25) * box; i++) {
 //Галава врага
 let enemySnakeX = enemySnake[0].x
 let enemySnakeY = enemySnake[0].y
+
+const buttonContainer = document.getElementById('buttonContainer')
+
+document.addEventListener("DOMContentLoaded", buttonContainer.style.display = 'flex')
 
 //Рисунок вани 3б
 function drawGame() {
@@ -192,36 +192,30 @@ function drawGame() {
 //99 способов умереть
 	if (enemySnakeX == snakeX && enemySnakeY == snakeY) {
 		clearInterval(game)
-		alert("You lose:( Last score:" + score)
-		location.reload()
+		menu()
 	}
-
 
 	if (score < 0 || snake.length < 1) {
 		clearInterval(game)
-		alert("You've become too small for that")
-		location.reload()
+		menu()
 	}
 
 	if (snakeX < box || snakeX > box * 17 || snakeY < 3 * box || snakeY > box * 17) {
 		clearInterval(game)
-		alert("You lose:( Last score: " + score)
-		location.reload()
+		menu()
 	}
 
 	for(let i = 0; i < bomb.length; i++) {
 		if(snakeX == bomb[i].x && snakeY == bomb[i].y) {
 			clearInterval(game)
-			alert("You eated something not that. Last score:" + score)
-			location.reload()
+			menu()
 		}
 	}
 
 	for (let i = 2; i < snake.length; i++) {
 		if (snakeX == snake[i].x && snakeY == snake[i].y) {
 		clearInterval(game)
-		alert("Testy? Last score:" + score)
-		location.reload()
+		menu()
 		}
 	}
 
@@ -240,6 +234,5 @@ function drawGame() {
 	ctx.font = "50px Arial"
 	ctx.fillText(score, box * 2.5, box * 1.7)
 }
-
 //Рисуем в тик
 let game = setInterval(drawGame, 110)
